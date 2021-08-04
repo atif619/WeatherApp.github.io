@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Georama&display=swap" rel="stylesheet">
+    <title>weather app ui design</title>
+   
+</head>
+
+<body>
+    <div class="container">
+        <div class="heading">
+            <h2>weather App</h2>
+        </div>
+        <div class="search_box">
+            <form action="">
+                <input type="search" id="search" class="input" placeholder="Enter Your City" autocomplete="off">
+                <button class="btn">Search</button>
+            </form>
+        </div>
+        <div class="report">
+            <div class="city_date">
+                <h2 class="cityName">Kenya, KN</h2>
+                <p class="date">Monday | 02 Aug | 2021</p>
+            </div>
+            <div class="image_box">
+                <img src="images/snow.png" class="image" alt="">
+            </div>
+            <div class="temp_details">
+                <h1 class="currTemp">14&deg;C</h1>
+                <h2 class="climate_type">Snow</h2>
+            </div>
+            <div class="additional_details">
+                <div class="wind">
+                    <h4 class="wind_speed">6.55 km/h</h4>
+                    <p class="wind">wind</p>
+                </div>
+                <div class="humid">
+                    <h4 class="humid_per">72%</h4>
+                    <p class="humid">Humidity</p>
+                </div>
+                <div class="maxmin">
+                    <h4 class="minmax_deg">26&deg;C / 22&deg;C</h4>
+                    <p class="minmax">max / min</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+   
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather api project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            /* background: #232323; */
+            background: url(image/img2.jpg) no-repeat;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 300px;
+            /* border: 1px solid red; */
+            padding: 0 20px;
+            color: #fff;
+            /* background: rgba(240,248,255,0.6); */
+            background: #44a08d;
+        }
+        .container #form{
+            margin: 20px 0;
+            text-align: center;
+        }
+        .container #form .input{
+            width: 100%;
+            padding: 6px 8px;
+            outline: none;
+            border: none;
+            color: #fff;
+            background: #2c3e50;
+            border-radius: 20px;
+            font-size: 16px;
+        }
+        .container #form .btn{
+            width: auto;
+            margin: 10px auto;
+            text-align: center;
+            outline: none;
+            border: none;
+            color: #fff;
+            padding: 7px 15px;
+            border-radius: 10px;
+            background: #eb4a4a;
+        }
+        .container .weather_report {
+            background: rgba(255,255,255,0.6);
+            margin: 20px 0;
+            color: #292929;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .container .weather_report .location,
+        .container .weather_report .city,
+        .container .weather_report .climate,
+        .container .weather_report .minmax_temp,
+        .container .weather_report .humidity,
+        .container .weather_report .country {
+            margin: 20px 0;
+        }
+        span{
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form action="" id="form">
+            <input type="search" class="input" placeholder="enter your city">
+            <button class="btn">Search</button>
+        </form>
+        <div class="weather_report">
+            <div class="location">
+                <h3 class="locName">-------------</h3>
+            </div>
+            <div class="city">
+                <span class="city_name">----------</span><span>&deg;C</span>
+            </div>
+            <div class="climate">
+                <h3 class="ctype">-------</h3>
+            </div>
+            <div class="temp">
+                <h4 class="minmax_temp">-----------</h4>
+            </div>
+            <div class="humidity">
+                <h3 class="humid">-----------</h3>
+            </div>
+            <div class="country">
+                <h3 class="country_code">-----------</h3>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <script>
+        let loc = document.querySelector('.locName');
+        let city_name = document.querySelector('.city_name');
+        let climate = document.querySelector('.ctype');
+        let btn = document.querySelector('.btn');
+        let input = document.querySelector('.input');
+        let code = document.querySelector('.minmax_temp');
+        let humid = document.querySelector('.humid');
+        let ccode = document.querySelector('.country_code')
+
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            getWeather(input.value);
+            input.value = "";
+        })
+
+
+
+        const getWeather = async (city) => {
+            try {
+                const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=7c52a0384581d5f20635ce6bae9d4af1`);
+
+                const wdata = await response.json();
+                const { name } = wdata;
+                const { feels_like, temp_max, temp_min, humidity } = wdata.main;
+                const { id, main } = wdata.weather[0];
+                const { country } = wdata.sys;
+                loc.innerHTML = `${name}, ${country}`;
+                climate.innerHTML = main;
+                city_name.innerHTML = Math.round(feels_like - 273);
+                code.innerHTML = `(max-temp) ${Math.round(temp_max - 273)}&deg;C / (min-temp) ${Math.round(temp_min - 273)}&deg;C`;
+                humid.innerHTML = `Humidity :  ${humidity}`;
+                // ccode.innerHTML = icon;
+                console.log(wdata);
+            }
+
+
+            catch (err) {
+                alert('city not found');
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        window.addEventListener('load', function () {
+            let long;
+            let lat;
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((pos) => {
+                    long = pos.coords.longitude;
+                    lat = pos.coords.latitude;
+
+                    const api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=7c52a0384581d5f20635ce6bae9d4af1`
+                    fetch(api)
+                        .then((res) => res.json())
+                        .then((data) => {
+                            const { name } = data;
+                            const { feels_like, temp_max, temp_min, humidity } = data.main;
+                            const { id, main } = data.weather[0];
+                            const { country } = data.sys;
+                            loc.innerHTML = `${name}, ${country}`;
+                            climate.innerHTML = main;
+                            city_name.innerHTML = `${Math.round(feels_like - 273)}`;
+                            code.innerHTML = `${Math.round(temp_max - 273)} / ${Math.round(temp_min - 273)}`;
+                            humid.innerHTML = `Humidity :  ${humidity}`;
+                            // ccode.innerHTML = country;
+                        })
+                })
+            }
+        })
+    </script>
+</body>
+
+</html> -->
